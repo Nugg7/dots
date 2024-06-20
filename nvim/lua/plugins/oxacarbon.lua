@@ -5,6 +5,6 @@ return {
   --   config = bar
   --   end,
   config = function()
-  --  vim.cmd.colorscheme "oxocarbon"
+    vim.cmd.colorscheme "oxocarbon"
   end
 }

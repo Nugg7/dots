@@ -9,7 +9,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls", "html", "markdown_oxide", "basedpyright", "jsonls", "jdtls", "quick_lint_js", "omnisharp", "csharp_ls", "clangd", "cssls", "biome", "eslint", "tsserver" }
+        ensure_installed = { "lua_ls", "html", "markdown_oxide", "basedpyright", "jsonls", "jdtls", "quick_lint_js", "omnisharp", "csharp_ls", "clangd", "cssls", "biome", "eslint", "tsserver", "unocss" }
       })
     end
   },
@@ -31,6 +31,9 @@ return {
         capabilities = capabilities
       }) --html
       lspconfig.cssls.setup({
+        capabilities = capabilities
+      }) --css
+      lspconfig.unocss.setup({
         capabilities = capabilities
       }) --css
       lspconfig.markdown_oxide.setup({
