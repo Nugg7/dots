@@ -103,6 +103,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
   alias zconf="nvim ~/.zshrc"
+  alias conf='cd ~/.config/'
   alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
   alias rcconf=' nvim /home/nuggs/.config/awesome/rc.lua'
   alias cl='clear'
