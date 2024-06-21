@@ -4,7 +4,4 @@ return {
   --   event = foo,
   --   config = bar
   --   end,
-  config = function()
-    vim.cmd.colorscheme "oxocarbon"
-  end
 }
