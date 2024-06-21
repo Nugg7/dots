@@ -1,11 +1,11 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-# Path to your oh-my-zsh installation.
+# Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
+# load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="minimal"
@@ -70,7 +70,7 @@ ZSH_THEME="minimal"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git archlinux zsh-autosuggestions)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -91,21 +91,26 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# Set personal aliases, overriding those provided by Oh My Zsh libs,
+# plugins, and themes. Aliases can be placed here, though Oh My Zsh
+# users are encouraged to define aliases within a top-level file in
+# the $ZSH_CUSTOM folder, with .zsh extension. Examples:
+# - $ZSH_CUSTOM/aliases.zsh
+# - $ZSH_CUSTOM/macos.zsh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
   alias zconf="nvim ~/.zshrc"
   alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
-  alias rcconf=' nvim ~/.config/awesome/rc.lua'
+  alias rcconf=' nvim /home/nuggs/.config/awesome/rc.lua'
   alias cl='clear'
-#  alias img='filepath=$(fd . /home/nugg/.config/wallps/ -u -i | fzf); kitty $filepath'
+  alias neofetch='neofetch --kitty /home/nuggs/Desktop/neofetch/Screenshot\ from\ 2024-01-15\ 20-20-03.png'
   alias film='lobster -i'
-  alias fdc='cd; cd CodeVim; filepath=$(fd --type d --hidden --max-depth 2 | fzf); cd $filepath'
+  alias fdc='cd; cd CodeVim; filepath=$(fd --type d --hidden --max-depth 3 | fzf); cd $filepath'
   alias fda='filepath=$(fd -u -i | fzf); cd $filepath'
-  alias fdd='filepath=$(fd --type f --hidden | fzf); smart_cd $filepath'
+  alias fdd='filepath=$(fd --type f --hidden | fzf-tmux -p); smart_cd $filepath'
   alias fdn='fd --type f --hidden | fzf | xargs nvim'
   alias ddp='dragon-drop'
   alias nconf='cd ~/.config/nvim; nvim'
@@ -114,6 +119,15 @@ source $ZSH/oh-my-zsh.sh
   alias cgend= 'cmake .. -DCMAKE_BUILD_TYPE=Debug'
   alias cgenr='cmake .. -DCMAKE_BUILD_TYPE=Release'
   alias :q='exit'
+
+# aliases for git
+  
+  alias gps='git push'
+  alias gpl='git pull'
+  alias gcm='git commit -m'
+  alias gaa='git add --all'
+  alias gau='git add -u -u'
+  alias gss='git status'
 
 # 'alias' to cd into directory with file specified too 
   function smart_cd() {
@@ -126,10 +140,21 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$PATH:/home/nuggs/.spicetify
 export PATH=/usr/lib/jvm/java-22-openjdk/bin:$PATH
 
-# fzf-tab configuration
+# zsh fzf tab
+# disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+# NOTE: don't use escape sequences here, fzf-tab will ignore them
 zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
 zstyle ':completion:*' menu no
+# preview directory's content with eza when completing cd
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-zstyle ':fzf-tab:*' switch-group '<' '>'
+# switch group using `<` and `>`
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+
+source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
