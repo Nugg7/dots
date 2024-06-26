@@ -287,10 +287,6 @@ globalkeys = gears.table.join(
     { description = "focus previous by index", group = "client" }
   ),
 
-  -- Lobster
-  awful.key({ modkey, }, "w", function() awful.spawn(terminal .. " -e 'lobster'") end,
-    { description = "opens lobster with rofi", group = "menu" }),
-
   -- Ani-Cli
   awful.key({ modkey, }, "a", function() awful.spawn(terminal .. " -e 'ani-cli'") end,
     { description = "opens ani-cli in terminal", group = "menu" }),
