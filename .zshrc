@@ -117,6 +117,7 @@ source $ZSH/oh-my-zsh.sh
   alias cdebug='cmake --build ./debug/'
   alias cgend= 'cmake .. -DCMAKE_BUILD_TYPE=Debug'
   alias cgenr='cmake .. -DCMAKE_BUILD_TYPE=Release'
+  alias legn='export NODE_OPTIONS=--openssl-legacy-provider'
   alias :q='exit'
 
 # aliases for git
