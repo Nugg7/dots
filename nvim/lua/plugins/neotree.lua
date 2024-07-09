@@ -11,6 +11,8 @@ return {
     vim.keymap.set('n', '<C-n>', '<Cmd>Neotree toggle<CR>', {})
     -- keymap for copying to clipboard
     vim.keymap.set('v', '<leader>y', '"+y<CR>', {})
+    -- keymap to paste without losing the word in the buffer
+    vim.keymap.set('v', '<leader>p', '"_dP', {})
     -- <C-w>*2 to swtich between neotree and buffer
   end
 }
