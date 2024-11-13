@@ -134,6 +134,48 @@ source $ZSH/oh-my-zsh.sh
     cd "$(dirname $1)"
   }
 
+# Alias for ports
+
+pchange() {
+    # Check if exactly four arguments are provided
+    if [ "$#" -ne 4 ]; then
+        echo "Usage: pchange <port_number> <tcp|udp> <action> <chain>"
+        echo "Action: -A (add) or -D (delete)"
+        echo "Chain: INPUT, OUTPUT, or FORWARD"
+        return 1
+    fi
+
+    # Assign arguments to variables for clarity
+    PORT=$1
+    PROTOCOL=$2
+    ACTION=$3
+    CHAIN=$4
+
+    # Validate the protocol
+    if [[ "$PROTOCOL" != "tcp" && "$PROTOCOL" != "udp" ]]; then
+        echo "Protocol must be 'tcp' or 'udp'."
+        return 1
+    fi
+
+    # Validate the action
+    if [[ "$ACTION" != "-A" && "$ACTION" != "-D" ]]; then
+        echo "Action must be '-A' (add) or '-D' (delete)."
+        return 1
+    fi
+
+    # Validate the chain
+    if [[ "$CHAIN" != "INPUT" && "$CHAIN" != "OUTPUT" && "$CHAIN" != "FORWARD" ]]; then
+        echo "Chain must be 'INPUT', 'OUTPUT', or 'FORWARD'."
+        return 1
+    fi
+
+    # Execute the iptables command based on the action and chain
+    sudo iptables "$ACTION" "$CHAIN" -p "$PROTOCOL" --dport "$PORT" -j ACCEPT
+
+    echo "Executed: iptables $ACTION $CHAIN -p $PROTOCOL --dport $PORT -j ACCEPT"
+}
+
+
 # dotnet aliases
   alias dnr='dotnet run'
   alias dnb='dotnet build'
@@ -158,3 +200,9 @@ zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /home/nugg/.dart-cli-completion/zsh-config.zsh ]] && . /home/nugg/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+
