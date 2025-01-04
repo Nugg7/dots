@@ -7,7 +7,7 @@ return{
       -- vim.cmd.colorscheme "eva01"
       -- vim.cmd.colorscheme "eva01-LCL"
       -- (other colorscheme)
-    vim.cmd.colorscheme "eva01"
+    -- vim.cmd.colorscheme "eva01"
     end,
   }
 }
