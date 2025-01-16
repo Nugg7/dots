@@ -7,13 +7,9 @@ return {
     },
     {
         "williamboman/mason-lspconfig.nvim",
-        lazy = false,
-        opts = {
-            auto_install = true
-        },
         config = function()
             require("mason-lspconfig").setup({
-                ensure_installed = { "lua_ls", "html", "markdown_oxide", "basedpyright", "jsonls", "jdtls", "quick_lint_js", "omnisharp", "csharp_ls", "clangd", "cssls", "biome", "eslint", "tsserver", "unocss" }
+                ensure_installed = { "lua_ls", "html", "markdown_oxide", "basedpyright", "jsonls", "jdtls", "quick_lint_js", "omnisharp", "csharp_ls", "clangd", "cssls", "biome", "eslint", "tsserver", "unocss", "lemminx" }
             })
         end
     },
@@ -55,6 +51,9 @@ return {
             lspconfig.biome.setup({
                 capabilities = capabilities
             }) --javascript
+            lspconfig.lemminx.setup({
+                capabilities = capabilities
+            }) --xml
             lspconfig.eslint.setup({
                 capabilities = capabilities
             }) --javascript
@@ -64,9 +63,6 @@ return {
             lspconfig.omnisharp.setup({
                 capabilities = capabilities
             })                      -- c#
-            lspconfig.lemminx.setup({
-                capabilities = capabilities
-            }) -- xml 
             lspconfig.sourcekit.setup({
                 cmd = { "/bin/sourcekit-lsp" }, -- Path to sourcekit-lsp executable
                 root_dir = function(fname)
